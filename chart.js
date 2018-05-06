@@ -1,5 +1,19 @@
 
-var cairnGID = [1480282890,516807299,777978539,119436615,858369185,1015892548,940026070,461179812,1494700677,683383792,491765656,840142421];
+var cairnGID = [
+                1480282890, //Mechanics
+                516807299, //Ren - DPS
+                777978539, //Ren - DPS
+                119436615, //FB - DPS
+                858369185, //Condi BS
+                1015892548, //Power BS
+                940026070, //Weaver - DPS
+                461179812, //Scourge - DPS
+                1494700677, //Chrono - support
+                683383792, //DH - DPS
+                491765656, //Druid - Support
+                840142421 //Holo - DPS
+                ];
+
 var bossSheet= [
                 'https://docs.google.com/spreadsheets/d/1L6Z8UZNQvgLi1Ve9ybmUjD6yLdDIz4D65c4FfQB3Sec/gviz/tq?gid=', //vg
                 'https://docs.google.com/spreadsheets/d/1GiN7hb_m_aWAV811YhSddN2d32B7QnqfR45_lBNSUhM/gviz/tq?gid=', //gorse
