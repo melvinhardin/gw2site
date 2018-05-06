@@ -55,7 +55,7 @@ window.onload = function(){
     GID = cairnGID[classSelection];
     drawChart();
   };
-  document.getElementById("press").onclick = function(){
-    bossSelection = document.getElementById("menu").value;
+document.getElementById("bossPress").onclick = function(){
+    bossSelection = document.getElementById("bossSelect").value;
   };
 };
