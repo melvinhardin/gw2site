@@ -234,7 +234,7 @@ function drawChart() {
   	// Call to google sheet
  	var queryString = encodeURIComponent('')
   	var tableQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
-  	tableData = tableQuery.send(handleQueryResponse);
+  	var tableData = tableQuery.send(handleQueryResponse);
 	
 	var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
 	chartTable.draw(tableData, null);
@@ -251,7 +251,7 @@ function drawScatterChart() {
 
   var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1')
   var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
-  scatterData = chartQuery.send(handleQueryResponse);
+  var scatterData = chartQuery.send(handleQueryResponse);
 	
 	console.log("data is: " + scatterData);
 	
