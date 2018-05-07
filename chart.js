@@ -284,14 +284,14 @@ function drawTableVisualization(){
 }
 
 function drawScatterVisualization(){
-	tableWrapper = new google.visualization.ChartWrapper({
+	scatterWrapper = new google.visualization.ChartWrapper({
 		'chartType': 		'ScatterChart',
 		'dataSourceUrl': 	sheetLink + GID + "&headers=1&tq=",
 		'query':		'SELECT B, C LIMIT 2 OFFSET 1',
 		'containerId':		'chart_div'
 	});
 	
-	tableWrapper.draw();
+	scatterWrapper.draw();
 }
 
 window.onload = function(){
