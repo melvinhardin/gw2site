@@ -229,8 +229,7 @@ google.charts.load('current', {'packages':['corechart']});
 google.charts.load('current', {'packages': ['table']});
 
 // Set a callback to run when the Google Visualization API is loaded.
-google.charts.setOnLoadCallback(drawChart);
-google.charts.setOnLoadCallback(drawScatterChart);
+google.charts.setOnLoadCallback(drawVisualization);
 
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
@@ -291,7 +290,6 @@ window.onload = function(){
     	selectedBoss = bossGID[bossSelection];
     	GID = selectedBoss[classSelection];
     	sheetLink = bossSheet[bossSelection];
-    	drawChart();
-    	drawScatterChart();
+    	drawVisualization();
   };
 };
