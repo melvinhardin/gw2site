@@ -217,6 +217,7 @@ var bossSelection = 0;
 var classSelection = 0;
 var GID = 0;
 var sheetLink = 'https://docs.google.com/spreadsheets/d/1L6Z8UZNQvgLi1Ve9ybmUjD6yLdDIz4D65c4FfQB3Sec/gviz/tq?gid=';
+var scatterOptions = null;
 
 // Load the Visualization API and the corechart package.
 google.charts.load('current', {'packages':['corechart'], 'callback':drawChart});
@@ -237,11 +238,7 @@ function drawChart() {
 
 function drawScatterChart() {
   // Call to google sheet
-  var options = {
-    title:  'LI vs DPS',
-    vAxis: {title: 'LI'},
-    hAxis: {title: 'DPS'}
-  };
+  
 
   var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1')
   var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
@@ -258,11 +255,16 @@ function handleQueryResponse(response) {
 
 
         //Create table
+      var options = {
+	    title:  'LI vs DPS',
+	    vAxis: {title: 'LI'},
+	    hAxis: {title: 'DPS'}
+	  };
       var data = response.getDataTable();
       var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
       var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
       chartTable.draw(data, null);
-      chartScatter.draw(data, options);
+      chartScatter.draw(data, scatterOptions);
 }
 
 window.onload = function(){
