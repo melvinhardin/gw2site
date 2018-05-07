@@ -253,7 +253,7 @@ function drawScatterChart() {
   	var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1')
   	var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
   	scatterData = chartQuery.send(handleQueryResponse);
-	
+	console.log(chartQuery.send(handleQueryResponse));
 	console.log("data is: " + scatterData);
 	
       	var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
