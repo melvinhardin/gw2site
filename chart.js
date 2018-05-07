@@ -234,7 +234,7 @@ google.charts.setOnLoadCallback(drawScatterChart);
 // draws it.
 function drawChart() {
   	// Call to google sheet
- 	var queryString = encodeURIComponent('')
+ 	var queryString = encodeURIComponent('');
   	var tableQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
   	tableData = tableQuery.send(handleQueryResponse);
 	
