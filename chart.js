@@ -220,8 +220,8 @@ var sheetLink = 'https://docs.google.com/spreadsheets/d/1L6Z8UZNQvgLi1Ve9ybmUjD6
 var scatterOptions = null;
 
 // Load the Visualization API and the corechart package.
-google.charts.load('current', {'packages':['corechart'], 'callback':drawChart});
-google.charts.load('current', {'packages': ['table'],'callback':drawScatterChart});
+google.charts.load('current', {'packages':['corechart']});
+google.charts.load('current', {'packages': ['table']});
 
 // Set a callback to run when the Google Visualization API is loaded.
 google.charts.setOnLoadCallback(drawChart);
