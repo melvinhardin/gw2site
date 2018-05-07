@@ -239,6 +239,11 @@ function drawChart() {
 function drawScatterChart() {
   // Call to google sheet
   
+  var scatterOptions = {
+	title:  'LI vs DPS',
+	vAxis: {title: 'LI'},
+	hAxis: {title: 'DPS'}
+  };
 
   var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1')
   var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
@@ -255,11 +260,6 @@ function handleQueryResponse(response) {
 
 
         //Create table
-      var options = {
-	    title:  'LI vs DPS',
-	    vAxis: {title: 'LI'},
-	    hAxis: {title: 'DPS'}
-	  };
       var data = response.getDataTable();
       var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
       var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
