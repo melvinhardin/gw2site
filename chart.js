@@ -88,7 +88,11 @@ var kcGID = [
                 1638416332 //Holo - DPS
 ];
 
+
 var xeraGID = [
+
+var xeraGID = [ 
+
                 2042986611, //Mechanics
                 868093496, //Ren - DPS
                 1112758682, //FB - DPS
@@ -117,7 +121,23 @@ var cairnGID = [
                 683383792, //DH - DPS
                 491765656, //Druid - support
                 840142421 //Holo - DPS
+
+var moGID = [
+                809025824, //Mechanics
+                208587933, //Ren - DPS
+                913371253, //FB - DPS
+                454378217, //Condi BS
+                407633478, //Power BS
+                423931843, //Weaver - DPS
+                691809147, //Slb - DPS
+                1576480614, //Scourge - DPS
+                1144038318, //Chrono - support
+                2000255683, //DH - DPS
+                1154589258, //Druid - support
+                85044944, //Holo - DPS
               ];
+
+=======
 
 var moGID = [
                 809025824, //Mechanics
@@ -244,7 +264,10 @@ function handleQueryResponse(response) {
 
     //Create table
   	var data = response.getDataTable();
+
   	var chart = new google.visualization.Table(document.getElementById('chart_table_div'));
+  	var chart = new google.visualization.Table(document.getElementById('chart_div'));
+
   	chart.draw(data, null);
     chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
 }
@@ -259,7 +282,3 @@ window.onload = function(){
     drawChart();
   };
 };
-/*document.getElementById("bossPress").onclick = function(){
-
-  };
-};*/
