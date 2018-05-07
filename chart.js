@@ -268,10 +268,10 @@ function handleQueryResponse(response) {
         	return;
     	}
 	
-	console.log(response.getDataTable());
+	var data = response.getDataTable();
 	
      	//Create table
-     	return response.getDataTable();
+     	return data;
       
 }
 
