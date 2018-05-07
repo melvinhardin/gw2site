@@ -234,7 +234,10 @@ function drawChart() {
   	// Call to google sheet
  	var queryString = encodeURIComponent('')
   	var tableQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
-  	tableQuery.send(handleQueryResponse);
+  	tableData = tableQuery.send(handleQueryResponse);
+	
+	var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
+	chartTable.draw(tableData, null);
 }
 
 function drawScatterChart() {
@@ -248,7 +251,11 @@ function drawScatterChart() {
 
   var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1')
   var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
-  chartQuery.send(handleQueryResponse);
+  scatterData = chartQuery.send(handleQueryResponse);
+	
+      	var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+      	chartScatter.draw(scatterData, scatterOptions);
+	console.log("drew charts :] for " + GID);
 }
 
 function handleQueryResponse(response) {
@@ -260,13 +267,9 @@ function handleQueryResponse(response) {
     }
 
 
-        //Create table
-      var data = response.getDataTable();
-      var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
-      var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
-      chartTable.draw(data, null);
-      chartScatter.draw(data, scatterOptions);
-	console.log("drew charts :] for " + GID);
+      //Create table
+      return response.getDataTable();
+      
 }
 
 window.onload = function(){
