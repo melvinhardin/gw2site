@@ -221,7 +221,7 @@ var scatterOptions = null;
 
 // Load the Visualization API and the corechart package.
 google.charts.load('current', {'packages':['corechart'], 'callback':drawChart});
-google.charts.load('current', {'packages': ['table'],'callback':drawChart});
+google.charts.load('current', {'packages': ['table'],'callback':drawScatterChart});
 
 // Set a callback to run when the Google Visualization API is loaded.
 google.charts.setOnLoadCallback(drawChart);
