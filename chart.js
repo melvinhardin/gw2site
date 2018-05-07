@@ -258,7 +258,7 @@ function handleQueryResponse(response) {
 
 
         //Create table
-      var dataTable = response.getDataTable();
+      var data = response.getDataTable();
       var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
       var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
       chartTable.draw(data, null);
