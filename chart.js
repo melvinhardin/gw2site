@@ -237,9 +237,9 @@ function drawChart() {
   	// Call to google sheet
  	var queryString = encodeURIComponent('');
   	var tableQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
-  	tableQuery.send(handleQueryResponse);
 	
 	var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
+	google.visualization.events.addListener(chartTable, ready, tableQuery.send(handleQueryResponse);)
 	chartTable.draw(data, null);
 }
 
@@ -271,17 +271,16 @@ function handleQueryResponse(response) {
 	
 	data = response.getDataTable();
      	//Create table
-      
 }
 
 window.onload = function(){
-  document.getElementById("press").onclick = function(){
-    classSelection = document.getElementById("menu").value;
-    bossSelection = document.getElementById("bossSelect").value;
-    selectedBoss = bossGID[bossSelection];
-    GID = selectedBoss[classSelection];
-    sheetLink = bossSheet[bossSelection];
-    drawChart();
-    drawScatterChart();
+  	document.getElementById("press").onclick = function(){
+    	classSelection = document.getElementById("menu").value;
+    	bossSelection = document.getElementById("bossSelect").value;
+    	selectedBoss = bossGID[bossSelection];
+    	GID = selectedBoss[classSelection];
+    	sheetLink = bossSheet[bossSelection];
+    	drawChart();
+    	drawScatterChart();
   };
 };
