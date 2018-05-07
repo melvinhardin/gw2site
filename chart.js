@@ -272,9 +272,9 @@ function handleQueryResponse(response) {
 window.onload = function(){
   document.getElementById("press").onclick = function(){
     classSelection = document.getElementById("menu").value;
-    GID = selectedBoss[classSelection];
     bossSelection = document.getElementById("bossSelect").value;
     selectedBoss = bossGID[bossSelection];
+    GID = selectedBoss[classSelection];
     sheetLink = bossSheet[bossSelection];
     drawChart();
     drawScatterChart();
