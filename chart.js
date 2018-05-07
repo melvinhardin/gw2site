@@ -274,10 +274,10 @@ google.charts.setOnLoadCallback(drawVisualization);
 
 function drawVisualization(){
 	tableWrapper = new google.visualization.ChartWrapper({
-		chartType: 	'Table',
-		dataSourceUrl: 	sheetLink,
-		setQuery:	'SELECT B, C LIMIT 2 OFFSET 1'
-		containerId:	'chart_table_div'
+		'chartType': 		'Table',
+		'dataSourceUrl': 	sheetLink,
+		'setQuery':		'SELECT B, C LIMIT 2 OFFSET 1'
+		'containerId':		'chart_table_div'
 	});
 	
 	tableWrapper.draw();
