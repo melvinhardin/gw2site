@@ -239,7 +239,7 @@ function drawChart() {
   	var tableQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
 	
 	var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
-	google.visualization.events.addListener(chartTable, ready, tableQuery.send(handleQueryResponse);)
+	google.visualization.events.addListener(chartTable, ready, tableQuery.send(handleQueryResponse));
 	chartTable.draw(data, null);
 }
 
