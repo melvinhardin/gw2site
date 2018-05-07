@@ -244,7 +244,7 @@ function drawTableVisualization() {
 function caseSelection(bossID, classID) {
   var queryString = 'SELECT B, C OFFSET 1';
   //Guardian
-  if(classID == 9 && !(bossID in [2, 3, 12])) {
+  if(classID == 9 && !(bossID in ['2', '3', '12'])) {
     drawScatterRetalVisualization();
     return 'SELECT D, B OFFSET 1';
   }
