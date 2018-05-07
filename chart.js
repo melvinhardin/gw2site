@@ -288,7 +288,7 @@ function drawScatterVisualization(){
 		'chartType': 		'ScatterChart',
 		'dataSourceUrl': 	sheetLink + GID + "&headers=1&tq=",
 		'query':		'SELECT B, C LIMIT 2 OFFSET 1',
-		'containerId':		'chart_table_div'
+		'containerId':		'chart_div'
 	});
 	
 	tableWrapper.draw();
