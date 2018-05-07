@@ -218,6 +218,8 @@ var classSelection = 0;
 var GID = 991015174;
 var sheetLink = 'https://docs.google.com/spreadsheets/d/1L6Z8UZNQvgLi1Ve9ybmUjD6yLdDIz4D65c4FfQB3Sec/gviz/tq?gid=';
 var scatterOptions = null;
+var tableData = null;
+var scatterData = null;
 
 // Load the Visualization API and the corechart package.
 google.charts.load('current', {'packages':['corechart']});
@@ -234,7 +236,7 @@ function drawChart() {
   	// Call to google sheet
  	var queryString = encodeURIComponent('')
   	var tableQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
-  	var tableData = tableQuery.send(handleQueryResponse);
+  	tableData = tableQuery.send(handleQueryResponse);
 	
 	var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
 	chartTable.draw(tableData, null);
@@ -250,7 +252,7 @@ function drawScatterChart() {
 
   	var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1')
   	var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
-  	var scatterData = chartQuery.send(handleQueryResponse);
+  	scatterData = chartQuery.send(handleQueryResponse);
 	
 	console.log("data is: " + scatterData);
 	
