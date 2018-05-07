@@ -253,6 +253,8 @@ function drawScatterChart() {
   var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
   scatterData = chartQuery.send(handleQueryResponse);
 	
+	console.log(scatterData);
+	
       	var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
       	chartScatter.draw(scatterData, scatterOptions);
 	console.log("drew charts :] for " + GID);
