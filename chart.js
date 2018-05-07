@@ -218,9 +218,11 @@ var classSelection = 0;
 var GID = 991015174;
 var sheetLink = 'https://docs.google.com/spreadsheets/d/1L6Z8UZNQvgLi1Ve9ybmUjD6yLdDIz4D65c4FfQB3Sec/gviz/tq?gid=';
 var scatterOptions = null;
-var tableData = null;
-var scatterData = null;
-var data;
+
+var tableWrapper;
+//var tableData = null;
+//var scatterData = null;
+//var data;
 
 // Load the Visualization API and the corechart package.
 google.charts.load('current', {'packages':['corechart']});
@@ -233,43 +235,53 @@ google.charts.setOnLoadCallback(drawScatterChart);
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
-function drawChart() {
+//function drawChart() {
   	// Call to google sheet
- 	var queryString = encodeURIComponent('');
-  	var tableQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
+// 	var queryString = encodeURIComponent('');
+//  	var tableQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
 	
-	var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
-	chartTable.draw(data, null);
-}
+//	var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
+//	chartTable.draw(data, null);
+//}
 
-function drawScatterChart() {
+//function drawScatterChart() {
   	// Call to google sheet
-  	scatterOptions = {
-		title:  'LI vs DPS',
-		vAxis: {title: 'LI'},
-		hAxis: {title: 'DPS'}
-  	};
+ // 	scatterOptions = {
+//		title:  'LI vs DPS',
+//		vAxis: {title: 'LI'},
+//		hAxis: {title: 'DPS'}
+//  	};
 
-  	var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1');
-  	var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
-  	chartQuery.send(handleQueryResponse);
+//  	var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1');
+//  	var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
+//  	chartQuery.send(handleQueryResponse);
 	
-      	var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
-      	chartScatter.draw(data, scatterOptions);
+//      var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+//      chartScatter.draw(data, scatterOptions);
 	
-	console.log("drew charts :] for " + GID);
-}
+//	console.log("drew charts :] for " + GID)}
 
-function handleQueryResponse(response) {
+//function handleQueryResponse(response) {
 
  	//Handle error
-    	if (response.isError()) {
-        	alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-        	return;
-    	}
+//    	if (response.isError()) {
+//        	alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+//        	return;
+ //   	}
 	
-	data = response.getDataTable();
+//	data = response.getDataTable();
      	//Create table
+//}
+
+function drawVisualization(){
+	var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1');
+	tableWrapper = new google.visualization.ChartWrapper({
+		chartType: 	'Table',
+		dataSourceURL: 	sheetLink + GID +"&headers=1&tq=" + queryScatterString,
+		containerId:	'chart_table_div'
+	});
+	
+	tableWrapper.draw();
 }
 
 window.onload = function(){
