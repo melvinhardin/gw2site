@@ -233,8 +233,8 @@ google.charts.setOnLoadCallback(drawScatterVisualization);
 function drawTableVisualization() {
   tableWrapper = new google.visualization.ChartWrapper({
     'chartType': 'Table',
-    'dataSourceUrl': sheetLink + GID + "&headers=1&tq=",
-    'query':'',
+    'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
+    'query': '',
     'containerId': 'chart_table_div'
   });
   tableWrapper.draw();
@@ -243,11 +243,11 @@ function drawTableVisualization() {
 function drawScatterVisualization() {
   scatterWrapper = new google.visualization.ChartWrapper({
     'chartType': 'ScatterChart',
-    'dataSourceUrl': sheetLink + GID + "&headers=1&tq=",
+    'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
     'query': 'SELECT B, C LIMIT 2 OFFSET 1',
     'containerId': 'chart_div',
-    'options': { 'title' : 'xd', vAxis:{title:'LI'}, hAxis:{title:'DPS'} }
-  });
+    'options': { 'title' : 'xd', vAxis: { title: 'DPS', format: 'decimal'}, hAxis:{ title:'LI', format: 'decimal' } }
+    });
   scatterWrapper.draw();
 }
 
