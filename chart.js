@@ -267,6 +267,9 @@ function handleQueryResponse(response) {
         	alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
         	return;
     	}
+	
+	console.log(response.getDataTable());
+	
      	//Create table
      	return response.getDataTable();
       
