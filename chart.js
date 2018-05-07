@@ -215,7 +215,7 @@ var bossGID = [vgGID,gorseGID,sabGID,slothGID,matthiasGID,kcGID,xeraGID,cairnGID
 var selectedBoss = vgGID;
 var bossSelection = 0;
 var classSelection = 0;
-var GID = 0;
+var GID = 991015174;
 var sheetLink = 'https://docs.google.com/spreadsheets/d/1L6Z8UZNQvgLi1Ve9ybmUjD6yLdDIz4D65c4FfQB3Sec/gviz/tq?gid=';
 var scatterOptions = null;
 
