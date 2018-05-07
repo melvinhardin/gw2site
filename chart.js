@@ -240,7 +240,7 @@ function drawChart() {
 function drawScatterChart() {
   // Call to google sheet
   
-  var scatterOptions = {
+  scatterOptions = {
 	title:  'LI vs DPS',
 	vAxis: {title: 'LI'},
 	hAxis: {title: 'DPS'}
