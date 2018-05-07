@@ -243,7 +243,7 @@ function drawScatterChart() {
     hAxis: {title: 'DPS'}
   };
 
-  var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 0')
+  var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1')
   var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
   chartQuery.send(handleQueryResponse);
 }
