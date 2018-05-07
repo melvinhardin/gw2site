@@ -231,8 +231,8 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
   	// Call to google sheet
  	var queryString = encodeURIComponent('')
-  	var query = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
-  	query.send(handleQueryResponse);
+  	var tableQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
+  	tableQuery.send(handleQueryResponse);
 }
 
 function drawScatterChart() {
@@ -244,8 +244,8 @@ function drawScatterChart() {
   };
 
   var queryScatterString = encodeURIComponent('SELECT B, C OFFSET 0')
-  var query = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
-  query.send(handleQueryResponse);
+  var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
+  chartQuery.send(handleQueryResponse);
 }
 
 function handleQueryResponse(response) {
