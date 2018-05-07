@@ -250,7 +250,7 @@ function caseSelection(bossID, classID) {
 
   switch(bossID + '_' + classID)
   {
-    case value:
+    case '1_1':
       
       break;
   }
