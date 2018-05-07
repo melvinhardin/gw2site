@@ -243,7 +243,7 @@ function drawScatterChart() {
     hAxis: {title: 'DPS'}
   };
 
-  var queryScatterString = encodeURIComponent('SELECT B, C OFFSET 0')
+  var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 0')
   var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
   chartQuery.send(handleQueryResponse);
 }
@@ -261,8 +261,8 @@ function handleQueryResponse(response) {
       var dataTable = response.getDataTable();
       var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
       var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
-    chartTable.draw(data, null);
-    chartScatter.draw(data, options);
+      chartTable.draw(data, null);
+      chartScatter.draw(data, options);
 }
 
 window.onload = function(){
