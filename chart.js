@@ -221,6 +221,7 @@ var scatterOptions = null;
 
 var tableWrapper = null;
 var scatterWrapper = null;
+var retalWrapper = null;
 
 // Load the Visualization API and the corechart package.
 google.charts.load('current', { 'packages': ['corechart'] });
@@ -245,12 +246,12 @@ function caseSelection(bossID, classID) {
   //Guardian
   if(classID == 9 && !(bossID in [2, 3, 12])) {
     drawScatterRetalVisualization();
-    return 'SELECT D, C OFFSET 1';
+    return 'SELECT D, B OFFSET 1';
   }
 
   switch(bossID + '_' + classID)
   {
-    case '1_1':
+    case '1_1': 
       
       break;
   }
@@ -270,14 +271,14 @@ function drawScatterVisualization() {
 }
 
 function drawScatterRetalVisualization() {
-  scatterWrapper = new google.visualization.ChartWrapper({
+  retalWrapper = new google.visualization.ChartWrapper({
     'chartType': 'ScatterChart',
     'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
     'query': 'SELECT B, C',
     'containerId': 'retal',
     'options': {title: 'Retal', vAxis: {title: 'Retal', format: 'short', minValue: 0}, hAxis: {title:'LI', format: 'short', minValue: 0}}
     });
-  scatterWrapper.draw();
+  retalWrapper.draw();
 }
 
 function drawCandleVisualization() {
