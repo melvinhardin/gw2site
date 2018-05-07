@@ -231,6 +231,7 @@ google.charts.load('current', {'packages': ['table']});
 
 // Set a callback to run when the Google Visualization API is loaded.
 google.charts.setOnLoadCallback(drawTableVisualization);
+google.charts.setOnLoadCallback(drawScatterVisualization);
 
 /* Callback that creates and populates a data table,
  instantiates the pie chart, passes in the data and
@@ -275,10 +276,10 @@ function handleQueryResponse(response) {
 
 function drawTableVisualization(){
   tableWrapper = new google.visualization.ChartWrapper({
-    'chartType':     'Table',
-    'dataSourceUrl':   sheetLink + GID + "&headers=1&tq=",
-    'query':'SELECT B, C LIMIT 2 OFFSET 1',
-    'containerId':    'chart_table_div'
+    'chartType': 'Table',
+    'dataSourceUrl': sheetLink + GID + "&headers=1&tq=",
+    'query':'',
+    'containerId': 'chart_table_div'
   });
   
   tableWrapper.draw();
@@ -286,10 +287,11 @@ function drawTableVisualization(){
 
 function drawScatterVisualization(){
   scatterWrapper = new google.visualization.ChartWrapper({
-    'chartType':     'ScatterChart',
-    'dataSourceUrl':   sheetLink + GID + "&headers=1&tq=",
-    'query':    'SELECT B, C LIMIT 2 OFFSET 0',
-    'containerId':    'chart_div'
+    'chartType': 'ScatterChart',
+    'dataSourceUrl': sheetLink + GID + "&headers=1&tq=",
+    'query': 'SELECT B, C LIMIT 2 OFFSET 0',
+    'containerId': 'chart_div',
+    'options': {'title' : 'xd', 'vAxis':'LI', 'hAxis':'DPS'}
   });
   
   scatterWrapper.draw();
