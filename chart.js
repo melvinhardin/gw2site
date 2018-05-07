@@ -243,8 +243,8 @@ function drawScatterChart() {
     hAxis: {title: 'DPS'}
   };
 
-  var queryString = encodeURIComponent('SELECT B C')
-  var query = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
+  var queryScatterString = encodeURIComponent('SELECT B C')
+  var query = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
   query.send(handleQueryResponse);
 }
 
