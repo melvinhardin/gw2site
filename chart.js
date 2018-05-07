@@ -269,7 +269,7 @@ function handleQueryResponse(response) {
     	}
 	
 	var data = response.getDataTable();
-	
+	console.log(data);
      	//Create table
      	return data;
       
