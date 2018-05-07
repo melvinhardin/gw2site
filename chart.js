@@ -235,21 +235,34 @@ function drawChart() {
   	query.send(handleQueryResponse);
 }
 
+function drawScatterChart() {
+  // Call to google sheet
+  var options = {
+    title:  'LI vs DPS',
+    vAxis: {title: 'LI'},
+    hAxis: {title: 'DPS'}
+  };
+
+  var queryString = encodeURIComponent('SELECT B C')
+  var query = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
+  query.send(handleQueryResponse);
+}
+
 function handleQueryResponse(response) {
 
-	//Handle error
-	if (response.isError()) {
+    //Handle error
+    if (response.isError()) {
         alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
         return;
     }
 
-	
-	    //Create table
+
+        //Create table
       var data = response.getDataTable();
       var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
       var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
-	chartTable.draw(data, null);
-	chartScatter.draw(data, null);
+    chartTable.draw(data, null);
+    chartScatter.draw(data, null);
 }
 
 window.onload = function(){
@@ -260,5 +273,6 @@ window.onload = function(){
     selectedBoss = bossGID[bossSelection];
     sheetLink = bossSheet[bossSelection];
     drawChart();
+    drawScatterChart();
   };
 };
