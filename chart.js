@@ -276,5 +276,6 @@ window.onload = function(){
     sheetLink = bossSheet[bossSelection];
     drawChart();
     drawScatterChart();
+	console.log("drew charts :]");
   };
 };
