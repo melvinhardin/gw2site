@@ -241,22 +241,22 @@ function drawChart() {
 }
 
 function drawScatterChart() {
-  // Call to google sheet
-  
-  scatterOptions = {
-	title:  'LI vs DPS',
-	vAxis: {title: 'LI'},
-	hAxis: {title: 'DPS'}
-  };
+  	// Call to google sheet
+  	scatterOptions = {
+		title:  'LI vs DPS',
+		vAxis: {title: 'LI'},
+		hAxis: {title: 'DPS'}
+  	};
 
-  var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1')
-  var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
-  var scatterData = chartQuery.send(handleQueryResponse);
+  	var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1')
+  	var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
+  	var scatterData = chartQuery.send(handleQueryResponse);
 	
 	console.log("data is: " + scatterData);
 	
       	var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
       	chartScatter.draw(scatterData, scatterOptions);
+	
 	console.log("drew charts :] for " + GID);
 }
 
