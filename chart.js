@@ -88,7 +88,7 @@ var kcGID = [
                 1638416332 //Holo - DPS
 ];
 
-var xeraGID = [ 
+var xeraGID = [
 
                 2042986611, //Mechanics
                 868093496, //Ren - DPS
@@ -234,6 +234,19 @@ function drawChart() {
   	query.send(handleQueryResponse);
 }
 
+function drawScatterChart() {
+  // Call to google sheet
+  var options = {
+    title:  'LI vs DPS',
+    vAxis: {title: 'LI'},
+    hAxis: {title: 'DPS'}
+  };
+
+  var queryString = encodeURIComponent('SELECT B C')
+  var query = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
+  query.send(handleQueryResponse);
+}
+
 function handleQueryResponse(response) {
 
 	//Handle error
@@ -242,7 +255,7 @@ function handleQueryResponse(response) {
         return;
     }
 
-	
+
 	    //Create table
       var data = response.getDataTable();
       var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
@@ -259,5 +272,6 @@ window.onload = function(){
     selectedBoss = bossGID[bossSelection];
     sheetLink = bossSheet[bossSelection];
     drawChart();
+    drawScatterChart();
   };
 };
