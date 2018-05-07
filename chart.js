@@ -253,7 +253,7 @@ function drawScatterChart() {
   var chartQuery = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryScatterString);
   scatterData = chartQuery.send(handleQueryResponse);
 	
-	console.log(scatterData);
+	console.log("data is: " + scatterData);
 	
       	var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
       	chartScatter.draw(scatterData, scatterOptions);
@@ -262,15 +262,13 @@ function drawScatterChart() {
 
 function handleQueryResponse(response) {
 
-    //Handle error
-    if (response.isError()) {
-        alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-        return;
-    }
-
-
-      //Create table
-      return response.getDataTable();
+ 	//Handle error
+    	if (response.isError()) {
+        	alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+        	return;
+    	}
+     	//Create table
+     	return response.getDataTable();
       
 }
 
