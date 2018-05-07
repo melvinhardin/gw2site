@@ -88,7 +88,7 @@ var kcGID = [
                 1638416332 //Holo - DPS
 ];
 
-var xeraGID = [ 
+var xeraGID = [
                 2042986611, //Mechanics
                 868093496, //Ren - DPS
                 1112758682, //FB - DPS
@@ -244,8 +244,9 @@ function handleQueryResponse(response) {
 
     //Create table
   	var data = response.getDataTable();
-  	var chart = new google.visualization.Table(document.getElementById('chart_div'));
+  	var chart = new google.visualization.Table(document.getElementById('chart_table_div'));
   	chart.draw(data, null);
+    chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
 }
 
 window.onload = function(){
@@ -259,6 +260,6 @@ window.onload = function(){
   };
 };
 /*document.getElementById("bossPress").onclick = function(){
-    
+
   };
 };*/
