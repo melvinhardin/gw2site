@@ -287,7 +287,7 @@ function drawScatterVisualization(){
 	scatterWrapper = new google.visualization.ChartWrapper({
 		'chartType': 		'ScatterChart',
 		'dataSourceUrl': 	sheetLink + GID + "&headers=1&tq=",
-		'query':		'SELECT B, C LIMIT 2 OFFSET 1',
+		'query':		'SELECT B, C LIMIT 2 OFFSET 0',
 		'containerId':		'chart_div'
 	});
 	
