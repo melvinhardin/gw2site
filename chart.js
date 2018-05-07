@@ -220,6 +220,7 @@ var sheetLink = 'https://docs.google.com/spreadsheets/d/1L6Z8UZNQvgLi1Ve9ybmUjD6
 var scatterOptions = null;
 
 var tableWrapper;
+var scatterWrapper;
 /*var tableData = null;
 var scatterData = null;
 var data; */
@@ -229,7 +230,7 @@ google.charts.load('current', {'packages':['corechart']});
 google.charts.load('current', {'packages': ['table']});
 
 // Set a callback to run when the Google Visualization API is loaded.
-google.charts.setOnLoadCallback(drawVisualization);
+google.charts.setOnLoadCallback(drawTableVisualization);
 
 /* Callback that creates and populates a data table,
  instantiates the pie chart, passes in the data and
@@ -272,7 +273,7 @@ function handleQueryResponse(response) {
      	//Create table
 }*/
 
-function drawVisualization(){
+function drawTableVisualization(){
 	tableWrapper = new google.visualization.ChartWrapper({
 		'chartType': 		'Table',
 		'dataSourceUrl': 	sheetLink + GID + "&headers=1&tq=",
@@ -283,6 +284,17 @@ function drawVisualization(){
 	tableWrapper.draw();
 }
 
+function drawScatterVisualization(){
+	scatterWrapper = new google.visualization.ChartWrapper({
+		'chartType': 		'ScatterChart',
+		'dataSourceUrl': 	sheetLink + GID + "&headers=1&tq=",
+		'query':		'SELECT B, C LIMIT 2 OFFSET 0',
+		'containerId':		'chart_div'
+	});
+	
+	scatterWrapper.draw();
+}
+
 window.onload = function(){
   	document.getElementById("press").onclick = function(){
     	classSelection = document.getElementById("menu").value;
@@ -290,6 +302,7 @@ window.onload = function(){
     	selectedBoss = bossGID[bossSelection];
     	GID = selectedBoss[classSelection];
     	sheetLink = bossSheet[bossSelection];
-    	drawVisualization();
+    	drawTableVisualization();
+	drawScatterVisualization();
   };
 };
