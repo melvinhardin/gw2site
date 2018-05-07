@@ -265,6 +265,7 @@ function handleQueryResponse(response) {
       var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
       chartTable.draw(data, null);
       chartScatter.draw(data, scatterOptions);
+	console.log("drew charts :] for " + GID);
 }
 
 window.onload = function(){
@@ -276,6 +277,5 @@ window.onload = function(){
     sheetLink = bossSheet[bossSelection];
     drawChart();
     drawScatterChart();
-	console.log("drew charts :]");
   };
 };
