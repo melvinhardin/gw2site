@@ -208,7 +208,7 @@ var bossSheet = [
                 'https://docs.google.com/spreadsheets/d/1KwuXDkfleVrcSp6GbWF-GlLC9c2-slphRkD5jRxbIbc/gviz/tq?gid=', //sam
                 'https://docs.google.com/spreadsheets/d/15qrugyur2zX27IuzcWdJgwpKfkay2FNTzuIA-YsJ8WY/gviz/tq?gid=', //deim
                 'https://docs.google.com/spreadsheets/d/1vxyXvP2cZf-m-HsZCvY7Yv-rrqHGAvN66-KYmX4g3yo/gviz/tq?gid=', //sh
-                'https://docs.google.com/spreadsheets/d/15Bx8GtDL2xyD6OWCQNHLKG2YD98HTkGcmSb0UMIDxZ8/gviz/tq?gid='  //deimos
+                'https://docs.google.com/spreadsheets/d/15Bx8GtDL2xyD6OWCQNHLKG2YD98HTkGcmSb0UMIDxZ8/gviz/tq?gid='  //dhuum10
                 ];
 
 var bossGID = [vgGID, gorseGID, sabGID, slothGID, matthiasGID, kcGID, xeraGID, cairnGID, moGID, samGID, deimGID, shGID, dhuumGID];
@@ -219,11 +219,11 @@ var GID = 991015174;
 var sheetLink = 'https://docs.google.com/spreadsheets/d/1L6Z8UZNQvgLi1Ve9ybmUjD6yLdDIz4D65c4FfQB3Sec/gviz/tq?gid=';
 var scatterOptions = null;
 
-var tableWrapper;
-var scatterWrapper;
+var tableWrapper = null;
+var scatterWrapper = null;
 
 // Load the Visualization API and the corechart package.
-google.charts.load('current', { 'packages':['corechart'] });
+google.charts.load('current', { 'packages': ['corechart'] });
 google.charts.load('current', { 'packages': ['table'] });
 
 // Set a callback to run when the Google Visualization API is loaded.
@@ -239,16 +239,35 @@ function drawTableVisualization() {
   });
   tableWrapper.draw();
 }
-
+function caseSelection(bossID, classID) {
+  var queryString = 'SELECT B, C OFFSET 1';
+  //var var = var - var += var + var;
+  return queryString;
+}
+//case DPS classes that arent DH or scourge
 function drawScatterVisualization() {
   scatterWrapper = new google.visualization.ChartWrapper({
     'chartType': 'ScatterChart',
     'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
-    'query': 'SELECT B, C LIMIT 2 OFFSET 1',
+    'query': caseSelection(bossSelection, classSelection),
     'containerId': 'chart_div',
-    'options': { 'title' : 'xd', vAxis: { title: 'DPS', format: 'decimal'}, hAxis:{ title:'LI', format: 'decimal' } }
+    'options': {title: 'xd', vAxis: {title: 'DPS', format: 'short', minValue: 0}, hAxis: {title:'LI', format: 'short', minValue: 0}}
     });
   scatterWrapper.draw();
+}
+
+function drawCandleVisualization() {
+  candleWrapper = new google.visualization.candleWrapper({
+
+  });
+  candleWrapper.draw();
+}
+
+function drawStackedBarVisualization() {
+  stackedBarWrapper = new google.visualization.stackedBarWrapper({
+
+  });
+  stackedBarWrapper.draw();
 }
 
 window.onload = function() {

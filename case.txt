@@ -1,0 +1,51 @@
+0: Mechanics                                                     0: VG
+1: Ren - DPS                                                     1: Gorse
+2: FB - DPS                                                      2: Sab
+3: Condi BS                                                      3: Sloth
+4: Power BS                                                      4: Matthias
+5: Weaver - DPS                                                  5: KC
+6: Slb - DPS                                                     6: Xera
+7: Scourge - DPS                                                 7: Cairn
+8: Chrono - support                                              8: MO
+9: DH - DPS                                                      9: Samarog
+10: Druid - support                                             10: Deimos
+11: Holo - DPS                                                  11: SH
+                                                                12: Dhuum
+
+DPS:
+ Case guardian: {Time, LI, DPS, Retal}                          class 9      Scatter
+ Case Scourge:  {DPS, Epi bounce, out/in bounce}                class 7      Scatter
+
+Bosses:
+ Case Sloth {DPS, Shroom}                                       boss 3       Scatter
+ Case Sab   {DPS, Canon}                                        boss 2       Scatter
+ Case Dhuum {DPS, Green}                                        boss 12      Scatter
+
+Druid:                                                          class 10
+ First 4 are always the same
+    VG: Seeker Control Quality                                  boss 0      Candlestick
+    Gorse: Wyvern?, Spirit management?                          boss 1		Stacked Bar
+    Sab: Failed flak number,                                    boss 2      Scatter
+	                         caught greens?                     boss 2      Stacked Bar
+
+    Sloth: CC pets?                                             boss 3      Stacked Bar
+    Matthias: CC pets? Nature spirit y/n? Healing spring y/n?   boss 4      Stacked Bar
+
+    Keep construct: cc pet? burn phase prestack?                boss 5      Stacked Bar
+    Xera: CC pet?                                                           Stacked Bar
+	              Addcontrol quality                            boss 6      Candlestick
+
+    Cairn: Agony y/n?                                           boss 7      Stacked Bar
+    MO:                                                         boss 8 
+    Sam: CC pets?                                               boss 9      Stacked Bar
+    Deimos: CC pet?                                             boss 10     Stacked Bar
+
+    SH: CC pets?                                                boss 11     Stacked Bar
+    Dhuum: Cleanse?                                             boos 12     Stacked Bar
+
+Mechanics:                                                      class 0 
+ 
+Classes 0,7,9,10   Bosses 2,3,12
+
+
+
