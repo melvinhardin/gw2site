@@ -208,7 +208,7 @@ var bossSheet = [
                 'https://docs.google.com/spreadsheets/d/1KwuXDkfleVrcSp6GbWF-GlLC9c2-slphRkD5jRxbIbc/gviz/tq?gid=', //sam
                 'https://docs.google.com/spreadsheets/d/15qrugyur2zX27IuzcWdJgwpKfkay2FNTzuIA-YsJ8WY/gviz/tq?gid=', //deim
                 'https://docs.google.com/spreadsheets/d/1vxyXvP2cZf-m-HsZCvY7Yv-rrqHGAvN66-KYmX4g3yo/gviz/tq?gid=', //sh
-                'https://docs.google.com/spreadsheets/d/15Bx8GtDL2xyD6OWCQNHLKG2YD98HTkGcmSb0UMIDxZ8/gviz/tq?gid='  //deimos
+                'https://docs.google.com/spreadsheets/d/15Bx8GtDL2xyD6OWCQNHLKG2YD98HTkGcmSb0UMIDxZ8'  //deimos
                 ];
 
 var bossGID = [vgGID,gorseGID,sabGID,slothGID,matthiasGID,kcGID,xeraGID,cairnGID,moGID,samGID,deimGID,shGID,dhuumGID];
@@ -273,10 +273,10 @@ google.charts.setOnLoadCallback(drawVisualization);
 //}
 
 function drawVisualization(){
-	var queryScatterString = encodeURIComponent('SELECT B, C LIMIT 2 OFFSET 1');
 	tableWrapper = new google.visualization.ChartWrapper({
 		chartType: 	'Table',
-		dataSourceURL: 	sheetLink + GID +"&headers=1&tq=" + queryScatterString,
+		dataSourceURL: 	sheetLink,
+		setQuery:	'SELECT B, C LIMIT 2 OFFSET 1'
 		containerId:	'chart_table_div'
 	});
 	
