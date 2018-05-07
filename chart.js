@@ -244,9 +244,9 @@ function drawScatterVisualization() {
   scatterWrapper = new google.visualization.ChartWrapper({
     'chartType': 'ScatterChart',
     'dataSourceUrl': sheetLink + GID + "&headers=1&tq=",
-    'query': 'SELECT B, C LIMIT 2 OFFSET 0',
+    'query': 'SELECT B, C LIMIT 2 OFFSET 1',
     'containerId': 'chart_div',
-    'options': { 'title' : 'xd', 'vAxis':'LI', 'hAxis':'DPS' }
+    'options': { 'title' : 'xd', vAxis:{title:'LI'}, hAxis:{title:'DPS'} }
   });
   scatterWrapper.draw();
 }
