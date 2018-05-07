@@ -262,14 +262,13 @@ function handleQueryResponse(response) {
         return;
     }
 
-    //Create table
-  	var data = response.getDataTable();
-
-  	var chart = new google.visualization.Table(document.getElementById('chart_table_div'));
-  	var chart = new google.visualization.Table(document.getElementById('chart_div'));
-
-  	chart.draw(data, null);
-    chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+	
+	    //Create table
+      var data = response.getDataTable();
+      var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
+      var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+	chartTable.draw(data, null);
+	chartScatter.draw(data, null);
 }
 
 window.onload = function(){
