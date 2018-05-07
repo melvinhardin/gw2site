@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif|Open+Sans');
+
+body {
+  font-family:  "Open Sans", sans-serif;
+}
+
+#title {
+  font-family: "IBM Plex Serif", serif;
+}
+
+#subtitle {
+  color:       #d7290c;
+}

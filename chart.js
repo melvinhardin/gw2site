@@ -244,9 +244,10 @@ function handleQueryResponse(response) {
 
     //Create table
   	var data = response.getDataTable();
-  	var chart = new google.visualization.Table(document.getElementById('chart_table_div'));
+  	var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
   	chart.draw(data, null);
-    chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+    var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+    chart.draw(data,null);
 }
 
 window.onload = function(){
