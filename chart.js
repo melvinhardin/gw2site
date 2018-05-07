@@ -239,11 +239,24 @@ function drawTableVisualization() {
   });
   tableWrapper.draw();
 }
+
 function caseSelection(bossID, classID) {
   var queryString = 'SELECT B, C OFFSET 1';
-  //var var = var - var += var + var;
+  //Guardian
+  if(classID == 9 && !(bossID in [2, 3, 12])) {
+    drawScatterRetalVisualization();
+    return 'SELECT D, C OFFSET 1';
+  }
+
+  switch(bossID + '_' + classID)
+  {
+    case value:
+      
+      break;
+  }
   return queryString;
 }
+
 //case DPS classes that arent DH or scourge
 function drawScatterVisualization() {
   scatterWrapper = new google.visualization.ChartWrapper({
@@ -251,7 +264,18 @@ function drawScatterVisualization() {
     'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
     'query': caseSelection(bossSelection, classSelection),
     'containerId': 'chart_div',
-    'options': {title: 'xd', vAxis: {title: 'DPS', format: 'short', minValue: 0}, hAxis: {title:'LI', format: 'short', minValue: 0}}
+    'options': {title: 'DPS on LI', vAxis: {title: 'DPS', format: 'short', minValue: 0}, hAxis: {title:'LI', format: 'short', minValue: 0}}
+    });
+  scatterWrapper.draw();
+}
+
+function drawScatterRetalVisualization() {
+  scatterWrapper = new google.visualization.ChartWrapper({
+    'chartType': 'ScatterChart',
+    'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
+    'query': 'SELECT B, C',
+    'containerId': 'retal',
+    'options': {title: 'Retal', vAxis: {title: 'Retal', format: 'short', minValue: 0}, hAxis: {title:'LI', format: 'short', minValue: 0}}
     });
   scatterWrapper.draw();
 }
