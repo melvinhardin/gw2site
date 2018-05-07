@@ -118,6 +118,7 @@ var cairnGID = [
                 683383792, //DH - DPS
                 491765656, //Druid - support
                 840142421 //Holo - DPS
+	];
 
 var moGID = [
                 809025824, //Mechanics
