@@ -217,8 +217,9 @@ var bossSelection = 0;
 var classSelection = 0;
 var GID = 991015174;
 var sheetLink = 'https://docs.google.com/spreadsheets/d/1L6Z8UZNQvgLi1Ve9ybmUjD6yLdDIz4D65c4FfQB3Sec/gviz/tq?gid=';
-var scatterOptions = null;
 
+//chart specific
+var scatterOptions = null;
 var tableWrapper = null;
 var scatterWrapper = null;
 var retalWrapper = null;
@@ -227,10 +228,64 @@ var retalWrapper = null;
 google.charts.load('current', { 'packages': ['corechart'] });
 google.charts.load('current', { 'packages': ['table'] });
 
-// Set a callback to run when the Google Visualization API is loaded.
-google.charts.setOnLoadCallback(drawTableVisualization);
-google.charts.setOnLoadCallback(drawScatterVisualization);
 
+function clearChart(){
+  while (chart_table_div.firstChild) {
+    chart_table_div.removeChild(chart_table_div.firstChild);
+  }
+  while (chart_div.firstChild) {
+    chart_div.removeChild(chart_div.firstChild);
+  }
+  while (retal.firstChild) {
+    retal.removeChild(retal.firstChild);
+  }
+}
+
+//Case to get each table
+
+function caseSelection(bossID, classID) {
+  clearChart();
+  var queryString = 'SELECT B, C OFFSET 0';
+  var helperArray = [2,3,12];
+  drawTableVisualization();
+  
+  console.log('The if for guardian is: ' +(!(helperArray.indexOf(bossID) >= 0)) + ' bossID is: ' + bossID);
+  
+
+  if (classID != 0){
+    dpsScatterChart();
+  }
+
+  //Guardian
+  if(classID == 9 && !(helperArray.indexOf(bossID) >= 0)) {
+    console.log('going to draw retal chart');
+    
+    retalScatterChart();
+    return;
+  }
+
+
+  switch(bossID + '_' + classID)
+    {
+    case '1_1':
+      break;
+    default:
+      return;
+    }
+  return;
+}
+
+
+
+
+
+
+
+
+
+
+
+//DPS Table
 function drawTableVisualization() {
   tableWrapper = new google.visualization.ChartWrapper({
     'chartType': 'Table',
@@ -241,31 +296,12 @@ function drawTableVisualization() {
   tableWrapper.draw();
 }
 
-function caseSelection(bossID, classID) {
-  var queryString = 'SELECT B, C OFFSET 0';
-  var helperArray = [2,3,12]
-  console.log('The if for guardian is: ' +(!(helperArray.indexOf(bossID) >= 0)) + ' bossID is: ' + bossID);
-  //Guardian
-  if(classID == 9 && !(helperArray.indexOf(bossID) >= 0)) {
-    console.log('going to draw retal chart');
-    drawScatterRetalVisualization();
-    return 'SELECT D, B OFFSET 0';
-  }
-
-  switch(bossID + '_' + classID)
-  {
-    case '1_1':
-      break;
-  }
-  return queryString;
-}
-
-//case DPS classes that arent DH or scourge
-function drawScatterVisualization() {
+//DPS Scatter
+function dpsScatterChart() {
   scatterWrapper = new google.visualization.ChartWrapper({
     'chartType': 'ScatterChart',
     'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
-    'query': caseSelection(bossSelection, classSelection),
+    'query': 'SELECT B, C OFFSET 0',
     'containerId': 'chart_div',
     'options': {title: 'DPS on LI',
                 vAxis: {title: 'DPS',
@@ -278,17 +314,18 @@ function drawScatterVisualization() {
   scatterWrapper.draw();
 }
 
-function drawScatterRetalVisualization() {
+//Retal plot
+function retalScatterChart() {
   retalWrapper = new google.visualization.ChartWrapper({
     'chartType': 'ScatterChart',
     'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
-    'query': 'SELECT B, C',
+    'query': 'SELECT D, C',
     'containerId': 'retal',
     'options': {title: 'Retal',
-                vAxis: {title: 'Retal',
+                vAxis: {title: 'DPS',
                         format: 'short',
                         minValue: 0},
-                hAxis: {title:'LI',
+                hAxis: {title:'Retal',
                         format: 'short',
                         minValue: 0}}
   });
@@ -311,14 +348,17 @@ function drawStackedBarVisualization() {
 }
 
 window.onload = function() {
-  document.getElementById("press").onclick = function() {
+  document.getElementById("press").onclick = function(){
+    generateTables();
+  };
+};
+
+
+function generateTables() {
     classSelection = document.getElementById("menu").value;
     bossSelection = document.getElementById("bossSelect").value;
     selectedBoss = bossGID[bossSelection];
     GID = selectedBoss[classSelection];
     sheetLink = bossSheet[bossSelection];
-
-    drawTableVisualization();
-    drawScatterVisualization();
-  };
-};
+    caseSelection(bossSelection, classSelection);
+}
