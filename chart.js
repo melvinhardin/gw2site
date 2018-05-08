@@ -251,8 +251,8 @@ function caseSelection(bossID, classID) {
 
   switch(bossID + '_' + classID)
   {
-    case '1_1': 
-      
+    case '1_1':
+
       break;
   }
   return queryString;
@@ -270,22 +270,6 @@ function drawScatterVisualization() {
   scatterWrapper.draw();
 }
 
-<<<<<<< HEAD
-function drawScatterChart() {
-  // Call to google sheet
-  var options = {
-    title:  'LI vs DPS',
-    vAxis: {title: 'LI'},
-    hAxis: {title: 'DPS'}
-  };
-
-  var queryString = encodeURIComponent('SELECT B C')
-  var query = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
-  query.send(handleQueryResponse);
-}
-
-function handleQueryResponse(response) {
-=======
 function drawScatterRetalVisualization() {
   retalWrapper = new google.visualization.ChartWrapper({
     'chartType': 'ScatterChart',
@@ -303,23 +287,12 @@ function drawCandleVisualization() {
   });
   candleWrapper.draw();
 }
->>>>>>> d318b5e457c67b52d00a299add102180339835eb
 
 function drawStackedBarVisualization() {
   stackedBarWrapper = new google.visualization.stackedBarWrapper({
 
-<<<<<<< HEAD
-
-	    //Create table
-      var data = response.getDataTable();
-      var chartTable = new google.visualization.Table(document.getElementById('chart_table_div'));
-      var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
-	chartTable.draw(data, null);
-	chartScatter.draw(data, null);
-=======
   });
   stackedBarWrapper.draw();
->>>>>>> d318b5e457c67b52d00a299add102180339835eb
 }
 
 window.onload = function() {
@@ -329,12 +302,8 @@ window.onload = function() {
     selectedBoss = bossGID[bossSelection];
     GID = selectedBoss[classSelection];
     sheetLink = bossSheet[bossSelection];
-<<<<<<< HEAD
-    drawChart();
-    drawScatterChart();
-=======
+
     drawTableVisualization();
     drawScatterVisualization();
->>>>>>> d318b5e457c67b52d00a299add102180339835eb
   };
 };
