@@ -118,6 +118,7 @@ var cairnGID = [
                 683383792, //DH - DPS
                 491765656, //Druid - support
                 840142421 //Holo - DPS
+  ];
 
 var moGID = [
                 809025824, //Mechanics
@@ -207,33 +208,69 @@ var bossSheet = [
                 'https://docs.google.com/spreadsheets/d/1KwuXDkfleVrcSp6GbWF-GlLC9c2-slphRkD5jRxbIbc/gviz/tq?gid=', //sam
                 'https://docs.google.com/spreadsheets/d/15qrugyur2zX27IuzcWdJgwpKfkay2FNTzuIA-YsJ8WY/gviz/tq?gid=', //deim
                 'https://docs.google.com/spreadsheets/d/1vxyXvP2cZf-m-HsZCvY7Yv-rrqHGAvN66-KYmX4g3yo/gviz/tq?gid=', //sh
-                'https://docs.google.com/spreadsheets/d/15Bx8GtDL2xyD6OWCQNHLKG2YD98HTkGcmSb0UMIDxZ8/gviz/tq?gid='  //deimos
+                'https://docs.google.com/spreadsheets/d/15Bx8GtDL2xyD6OWCQNHLKG2YD98HTkGcmSb0UMIDxZ8/gviz/tq?gid='  //dhuum10
                 ];
 
-var bossGID = [vgGID,gorseGID,sabGID,slothGID,matthiasGID,kcGID,xeraGID,cairnGID,moGID,samGID,deimGID,shGID,dhuumGID];
+var bossGID = [vgGID, gorseGID, sabGID, slothGID, matthiasGID, kcGID, xeraGID, cairnGID, moGID, samGID, deimGID, shGID, dhuumGID];
 var selectedBoss = vgGID;
 var bossSelection = 0;
 var classSelection = 0;
-var GID = 0;
+var GID = 991015174;
 var sheetLink = 'https://docs.google.com/spreadsheets/d/1L6Z8UZNQvgLi1Ve9ybmUjD6yLdDIz4D65c4FfQB3Sec/gviz/tq?gid=';
+var scatterOptions = null;
+
+var tableWrapper = null;
+var scatterWrapper = null;
+var retalWrapper = null;
 
 // Load the Visualization API and the corechart package.
-google.charts.load('current', {'packages':['corechart'], 'callback':drawChart});
-google.charts.load('current', {'packages': ['table'],'callback':drawChart});
+google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.load('current', { 'packages': ['table'] });
 
 // Set a callback to run when the Google Visualization API is loaded.
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(drawTableVisualization);
+google.charts.setOnLoadCallback(drawScatterVisualization);
 
-// Callback that creates and populates a data table,
-// instantiates the pie chart, passes in the data and
-// draws it.
-function drawChart() {
-  	// Call to google sheet
- 	var queryString = encodeURIComponent('')
-  	var query = new google.visualization.Query(sheetLink + GID +"&headers=1&tq=" + queryString);
-  	query.send(handleQueryResponse);
+function drawTableVisualization() {
+  tableWrapper = new google.visualization.ChartWrapper({
+    'chartType': 'Table',
+    'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
+    'query': '',
+    'containerId': 'chart_table_div'
+  });
+  tableWrapper.draw();
 }
 
+function caseSelection(bossID, classID) {
+  var queryString = 'SELECT B, C OFFSET 1';
+  //Guardian
+  if(classID == 9 && !(bossID in [2, 3, 12])) {
+    drawScatterRetalVisualization();
+    return 'SELECT D, B OFFSET 1';
+  }
+
+  switch(bossID + '_' + classID)
+  {
+    case '1_1': 
+      
+      break;
+  }
+  return queryString;
+}
+
+//case DPS classes that arent DH or scourge
+function drawScatterVisualization() {
+  scatterWrapper = new google.visualization.ChartWrapper({
+    'chartType': 'ScatterChart',
+    'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
+    'query': caseSelection(bossSelection, classSelection),
+    'containerId': 'chart_div',
+    'options': {title: 'DPS on LI', vAxis: {title: 'DPS', format: 'short', minValue: 0}, hAxis: {title:'LI', format: 'short', minValue: 0}}
+    });
+  scatterWrapper.draw();
+}
+
+<<<<<<< HEAD
 function drawScatterChart() {
   // Call to google sheet
   var options = {
@@ -248,13 +285,30 @@ function drawScatterChart() {
 }
 
 function handleQueryResponse(response) {
+=======
+function drawScatterRetalVisualization() {
+  retalWrapper = new google.visualization.ChartWrapper({
+    'chartType': 'ScatterChart',
+    'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
+    'query': 'SELECT B, C',
+    'containerId': 'retal',
+    'options': {title: 'Retal', vAxis: {title: 'Retal', format: 'short', minValue: 0}, hAxis: {title:'LI', format: 'short', minValue: 0}}
+    });
+  retalWrapper.draw();
+}
 
-	//Handle error
-	if (response.isError()) {
-        alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-        return;
-    }
+function drawCandleVisualization() {
+  candleWrapper = new google.visualization.candleWrapper({
 
+  });
+  candleWrapper.draw();
+}
+>>>>>>> d318b5e457c67b52d00a299add102180339835eb
+
+function drawStackedBarVisualization() {
+  stackedBarWrapper = new google.visualization.stackedBarWrapper({
+
+<<<<<<< HEAD
 
 	    //Create table
       var data = response.getDataTable();
@@ -262,16 +316,25 @@ function handleQueryResponse(response) {
       var chartScatter = new google.visualization.ScatterChart(document.getElementById('chart_div'));
 	chartTable.draw(data, null);
 	chartScatter.draw(data, null);
+=======
+  });
+  stackedBarWrapper.draw();
+>>>>>>> d318b5e457c67b52d00a299add102180339835eb
 }
 
-window.onload = function(){
-  document.getElementById("press").onclick = function(){
+window.onload = function() {
+  document.getElementById("press").onclick = function() {
     classSelection = document.getElementById("menu").value;
-    GID = selectedBoss[classSelection];
     bossSelection = document.getElementById("bossSelect").value;
     selectedBoss = bossGID[bossSelection];
+    GID = selectedBoss[classSelection];
     sheetLink = bossSheet[bossSelection];
+<<<<<<< HEAD
     drawChart();
     drawScatterChart();
+=======
+    drawTableVisualization();
+    drawScatterVisualization();
+>>>>>>> d318b5e457c67b52d00a299add102180339835eb
   };
 };
