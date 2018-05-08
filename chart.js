@@ -246,7 +246,7 @@ function caseSelection(bossID, classID) {
   var helperArray = [2,3,12]
   console.log('The if for guardian is: ' +(!(helperArray.indexOf(bossID) >= 0)) + ' bossID is: ' + bossID);
   //Guardian
-  if(classID == 9 && !(bossID in [2, 3, 12])) {
+  if(classID == 9 && !(helperArray.indexOf(bossID) >= 0)) {
     console.log('going to draw retal chart');
     drawScatterRetalVisualization();
     return 'SELECT D, B OFFSET 0';
