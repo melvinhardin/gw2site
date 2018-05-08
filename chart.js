@@ -246,13 +246,15 @@ function caseSelection(bossID, classID) {
   //Guardian
   if(classID == 9 && !(bossID in [2, 3, 12])) {
     drawScatterRetalVisualization();
-    return 'SELECT D, B OFFSET 1';
+    return 'SELECT D, B OFFSET 0';
+  }
+  else if(!(classID in [0,7,9,10]) && !(bossID in [2,3,12])) {
+    return 'SELECT B, C';
   }
 
   switch(bossID + '_' + classID)
   {
     case '1_1':
-
       break;
   }
   return queryString;
