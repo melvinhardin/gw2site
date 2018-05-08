@@ -245,6 +245,7 @@ function caseSelection(bossID, classID) {
   var queryString = 'SELECT B, C OFFSET 1';
   //Guardian
   if(classID == 9 && !(bossID in [2, 3, 12])) {
+    console.log('going to draw retal chart');
     drawScatterRetalVisualization();
     return 'SELECT D, B OFFSET 0';
   }
