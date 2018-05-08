@@ -228,7 +228,7 @@ var retalWrapper = null;
 google.charts.load('current', { 'packages': ['corechart'] });
 google.charts.load('current', { 'packages': ['table'] });
 
-
+// clear old charts
 function clearChart(){
   while (chart_table_div.firstChild) {
     chart_table_div.removeChild(chart_table_div.firstChild);
@@ -242,7 +242,6 @@ function clearChart(){
 }
 
 //Case to get each table
-
 function caseSelection(bossID, classID) {
   clearChart();
   bossID = parseInt(bossID);
@@ -276,17 +275,9 @@ function caseSelection(bossID, classID) {
     }
   return;
 }
-
-
-
-
-
-
-
-
-
-
-
+function errorHandler(wrapper){
+  google.visualization.errors.removeAll(document.getElementById(wrapper.getContainerId()));
+}
 //DPS Table
 function drawTableVisualization() {
   tableWrapper = new google.visualization.ChartWrapper({
@@ -295,7 +286,9 @@ function drawTableVisualization() {
     'query': '',
     'containerId': 'chart_table_div'
   });
+  google.visualization.events.addListener(tableWrapper, 'error', errorHandler(tableWrapper));
   tableWrapper.draw();
+
 }
 
 //DPS Scatter
@@ -313,6 +306,7 @@ function dpsScatterChart() {
                         format: 'short',
                         minValue: 0}}
     });
+  google.visualization.events.addListener(scatterWrapper, 'error', errorHandler(scatterWrapper));
   scatterWrapper.draw();
 }
 
@@ -332,6 +326,7 @@ function retalScatterChart() {
                         minValue: 0}}
   });
   console.log('drawing retal chart');
+  google.visualization.events.addListener(retalWrapper, 'error', errorHandler(retalWrapper));
   retalWrapper.draw();
 }
 
@@ -339,6 +334,7 @@ function drawCandleVisualization() {
   candleWrapper = new google.visualization.candleWrapper({
 
   });
+  google.visualization.events.addListener(candleWrapper, 'error', errorHandler(candleWrapper));
   candleWrapper.draw();
 }
 
@@ -346,6 +342,7 @@ function drawStackedBarVisualization() {
   stackedBarWrapper = new google.visualization.stackedBarWrapper({
 
   });
+  google.visualization.events.addListener(stackedBarWrapper, 'error', errorHandler(stackedBarWrapper));
   stackedBarWrapper.draw();
 }
 
