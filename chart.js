@@ -244,7 +244,7 @@ function drawTableVisualization() {
 function caseSelection(bossID, classID) {
   var queryString = 'SELECT B, C OFFSET 0';
   var helperArray = [2,3,12]
-  console.log('The if for guardian is: ' +(!(helperArray.indexOf(bossID) >= 0) + ' bossID is: ' + bossID);
+  console.log('The if for guardian is: ' +(!(helperArray.indexOf(bossID) >= 0)) + ' bossID is: ' + bossID);
   //Guardian
   if(classID == 9 && !(bossID in [2, 3, 12])) {
     console.log('going to draw retal chart');
