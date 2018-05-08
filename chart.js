@@ -246,6 +246,7 @@ function clearChart(){
 function caseSelection(bossID, classID) {
   clearChart();
   bossID = parseInt(bossID);
+  classID = parseInt(classID);
   var queryString = 'SELECT B, C OFFSET 0';
   var helperArray = [2,3,12];
   drawTableVisualization();
@@ -326,7 +327,6 @@ function retalScatterChart() {
                         format: 'short',
                         minValue: 0}}
   });
-  console.log('drawing retal chart');
   google.visualization.events.addListener(retalWrapper, 'error', function() {
     google.visualization.errors.removeAll(document.getElementById(retalWrapper.getContainerId()));
   });
@@ -356,6 +356,7 @@ function scourgeScatterChart(){
                 }
                }
   });
+  console.log('drawing scourge');
   scourgeWrapper.draw();
 }
 
