@@ -265,7 +265,13 @@ function drawScatterVisualization() {
     'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
     'query': caseSelection(bossSelection, classSelection),
     'containerId': 'chart_div',
-    'options': {title: 'DPS on LI', vAxis: {title: 'DPS', format: 'short', minValue: 0}, hAxis: {title:'LI', format: 'short', minValue: 0}}
+    'options': {title: 'DPS on LI',
+                vAxis: {title: 'DPS',
+                        format: 'short',
+                        minValue: 0},
+                hAxis: {title:'LI',
+                        format: 'short',
+                        minValue: 0}}
     });
   scatterWrapper.draw();
 }
@@ -276,7 +282,13 @@ function drawScatterRetalVisualization() {
     'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
     'query': 'SELECT B, C',
     'containerId': 'retal',
-    'options': {title: 'Retal', vAxis: {title: 'Retal', format: 'short', minValue: 0}, hAxis: {title:'LI', format: 'short', minValue: 0}}
+    'options': {title: 'Retal',
+                vAxis: {title: 'Retal',
+                        format: 'short',
+                        minValue: 0},
+                hAxis: {title:'LI',
+                        format: 'short',
+                        minValue: 0}}
     });
   retalWrapper.draw();
 }
