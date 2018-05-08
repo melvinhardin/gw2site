@@ -242,16 +242,13 @@ function drawTableVisualization() {
 }
 
 function caseSelection(bossID, classID) {
-  var queryString = 'SELECT B, C OFFSET 1';
+  var queryString = 'SELECT B, C OFFSET 0';
+  console.log('classID is: ' + classID);
   //Guardian
   if(classID == 9 && !(bossID in [2, 3, 12])) {
     console.log('going to draw retal chart');
     drawScatterRetalVisualization();
     return 'SELECT D, B OFFSET 0';
-  }
-  //regular behavior
-  else if(!(classID in [0,7,9,10]) && !(bossID in [2,3,12])) {
-    return 'SELECT B, C';
   }
 
   switch(bossID + '_' + classID)
