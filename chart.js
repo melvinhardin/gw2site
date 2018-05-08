@@ -356,6 +356,7 @@ function scourgeScatterChart(){
                 }
                }
   });
+  scourgeWrapper.draw();
 }
 
 function drawCandleVisualization() {
