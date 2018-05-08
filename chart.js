@@ -275,9 +275,7 @@ function caseSelection(bossID, classID) {
     }
   return;
 }
-function errorHandler(wrapper){
-  google.visualization.errors.removeAll(document.getElementById(wrapper.getContainerId()));
-}
+
 //DPS Table
 function drawTableVisualization() {
   tableWrapper = new google.visualization.ChartWrapper({
@@ -286,7 +284,9 @@ function drawTableVisualization() {
     'query': '',
     'containerId': 'chart_table_div'
   });
-  google.visualization.events.addListener(tableWrapper, 'error', errorHandler(tableWrapper));
+  google.visualization.events.addListener(tableWrapper, 'error', function() {
+    google.visualization.errors.removeAll(document.getElementById(tableWrapper.getContainerId()));
+  });
   tableWrapper.draw();
 
 }
@@ -306,7 +306,9 @@ function dpsScatterChart() {
                         format: 'short',
                         minValue: 0}}
     });
-  google.visualization.events.addListener(scatterWrapper, 'error', errorHandler(scatterWrapper));
+  google.visualization.events.addListener(scatterWrapper, 'error', function() {
+    google.visualization.errors.removeAll(document.getElementById(scatterWrapper.getContainerId()));
+  });
   scatterWrapper.draw();
 }
 
@@ -326,7 +328,9 @@ function retalScatterChart() {
                         minValue: 0}}
   });
   console.log('drawing retal chart');
-  google.visualization.events.addListener(retalWrapper, 'error', errorHandler(retalWrapper));
+  google.visualization.events.addListener(retalWrapper, 'error', function() {
+    google.visualization.errors.removeAll(document.getElementById(retalWrapper.getContainerId()));
+  });
   retalWrapper.draw();
 }
 
@@ -334,7 +338,9 @@ function drawCandleVisualization() {
   candleWrapper = new google.visualization.candleWrapper({
 
   });
-  google.visualization.events.addListener(candleWrapper, 'error', errorHandler(candleWrapper));
+  google.visualization.events.addListener(candleWrapper, 'error', function() {
+    google.visualization.errors.removeAll(document.getElementById(candleWrapper.getContainerId()));
+  });
   candleWrapper.draw();
 }
 
@@ -342,7 +348,9 @@ function drawStackedBarVisualization() {
   stackedBarWrapper = new google.visualization.stackedBarWrapper({
 
   });
-  google.visualization.events.addListener(stackedBarWrapper, 'error', errorHandler(stackedBarWrapper));
+  google.visualization.events.addListener(stackedBarWrapper, 'error', function() {
+    google.visualization.errors.removeAll(document.getElementById(stackedBarWrapper.getContainerId()));
+  });
   stackedBarWrapper.draw();
 }
 
