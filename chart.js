@@ -248,11 +248,7 @@ function caseSelection(bossID, classID) {
   var queryString = 'SELECT B, C OFFSET 0';
   var helperArray = [2,3,12];
   drawTableVisualization();
-
-  console.log('The if for guardian is: ' +(!(helperArray.indexOf(bossID) >= 0)) + ' bossID is: ' + bossID +
-               ' type for array is: ' + typeof helperArray[0] + ' type for bossID is: ' + typeof bossID);
-
-
+  
   if (classID != 0){
     dpsScatterChart();
   }
@@ -264,7 +260,6 @@ function caseSelection(bossID, classID) {
     retalScatterChart();
     return;
   }
-
 
   switch(bossID + '_' + classID)
     {
@@ -288,7 +283,6 @@ function drawTableVisualization() {
     google.visualization.errors.removeAll(document.getElementById(tableWrapper.getContainerId()));
   });
   tableWrapper.draw();
-
 }
 
 //DPS Scatter
@@ -359,7 +353,6 @@ window.onload = function() {
     generateTables();
   };
 };
-
 
 function generateTables() {
     classSelection = document.getElementById("menu").value;
