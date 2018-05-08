@@ -286,6 +286,7 @@ function drawTableVisualization() {
     'query': '',
     'containerId': 'chart_table_div'
   });
+
   google.visualization.events.addListener(tableWrapper, 'error', function() {
     google.visualization.errors.removeAll(document.getElementById(tableWrapper.getContainerId()));
   });
@@ -339,16 +340,15 @@ function scourgeScatterChart(){
   scourgeWrapper = new google.visualization.ChartWrapper({
     'chartType': 'ScatterChart',
     'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
-    'query': 'SELECT B,  C WHERE D CONTAINS "Yes, to boss", C WHERE D CONTAINS "Yes, from boss"', //SELECT B, C WHERE D = "Yes, to boss" || D = "Yes, from boss"
     'containerId': 'scourge',
     'options': {title: 'Epi Bouncing',
                 series: {
                   0: {targetAxisIndex: 0},
-                  1: {targetAxisIndex: 1}
+                  1: {targetAxisIndex: 1},
+                  2: {targetAxisIndex: 2},
                 },
                 vAxes: {
-                  0: {title: 'Epi to Boss'},
-                  1: {title: 'Epi from Boss'}
+                  0: {title: 'DPS'}
                 },
                 hAxis: {
                   title: 'LI',
@@ -357,6 +357,34 @@ function scourgeScatterChart(){
                 }
                }
   });
+
+  scourgeWrapper.setQuery('SELECT B, C WHERE D CONTAINS "Yes"');
+  var data1 = scourgeWrapper.getDataTable();
+  scourgeWrapper.setQuery('SELECT B, C WHERE D CONTAINS "from"');
+  var data2 = scourgeWrapper.getDataTable();
+  scourgeWrapper.setQuery('SELECT B, C WHERE D CONTAINS "No"');
+  var data3 = scourgeWrapper.getDataTable();
+  var joinData = null;
+  console.log('data1: ' + data1 + ' data2: ' + data2 + ' data3: ' + data3);
+  if(data1 == null && data2 != null) {
+    joinData = data2;
+  }
+  else if(data2 == null && data1 != null) {
+    joinData = data1;
+  }
+  else if(data1 == null && data2 == null) {
+    joinData = data3;
+  }
+  else {
+    joinData = google.visualization.data.join(data1, data2, 'full', [[0,0]], [0], [0]);
+  }
+
+  if(data3 != null){
+    joinData = google.visualization.data.join(joinData, data3, 'full', [[0,0]], [0], [0]);
+  }
+
+  scourgeWrapper.setDataTable(joinData);
+
   console.log('drawing scourge');
   scourgeWrapper.draw();
 }
