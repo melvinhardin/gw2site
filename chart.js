@@ -223,6 +223,7 @@ var scatterOptions = null;
 var tableWrapper = null;
 var scatterWrapper = null;
 var retalWrapper = null;
+var scourgeWrapper = null;
 
 // Load the Visualization API and the corechart package.
 google.charts.load('current', { 'packages': ['corechart'] });
@@ -248,16 +249,20 @@ function caseSelection(bossID, classID) {
   var queryString = 'SELECT B, C OFFSET 0';
   var helperArray = [2,3,12];
   drawTableVisualization();
-  
+
   if (classID != 0){
     dpsScatterChart();
   }
 
   //Guardian
-  if(classID == 9 && !(helperArray.indexOf(bossID) >= 0)) {
-    console.log('going to draw retal chart');
-
+  if(classID == 9) {
     retalScatterChart();
+    return;
+  }
+
+  //Scourge
+  else if(classID == 7 && !(helperArray.indexOf(bossID) >= 0)) {
+    scourgeScatterChart();
     return;
   }
 
@@ -326,6 +331,31 @@ function retalScatterChart() {
     google.visualization.errors.removeAll(document.getElementById(retalWrapper.getContainerId()));
   });
   retalWrapper.draw();
+}
+
+//Scourge plot
+function scourgeScatterChart(){
+  scourgeWrapper = new google.visualization.ChartWrapper({
+    'chartType': 'ScatterChart',
+    'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
+    'query': 'SELECT B, C WHERE D = "No", C WHERE D = "Yes, to boss", C WHERE D ="Yes, from boss"',
+    'containerId': 'scourge',
+    'options': {title: 'Epi Bouncing',
+                series: {
+                  0: {targetAxisIndex: 0},
+                  1: {targetAxisIndex: 1}
+                },
+                vAxes: {
+                  0: {title: 'Epi to Boss'},
+                  1: {title: 'Epi from Boss'}
+                },
+                hAxis: {
+                  title: 'LI',
+                  format: 'short',
+                  minValue: 0
+                }
+               }
+  });
 }
 
 function drawCandleVisualization() {
