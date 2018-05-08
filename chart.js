@@ -245,12 +245,14 @@ function clearChart(){
 
 function caseSelection(bossID, classID) {
   clearChart();
+  bossID = parseInt(bossID);
   var queryString = 'SELECT B, C OFFSET 0';
   var helperArray = [2,3,12];
   drawTableVisualization();
-  
-  console.log('The if for guardian is: ' +(!(helperArray.indexOf(bossID) >= 0)) + ' bossID is: ' + bossID);
-  
+
+  console.log('The if for guardian is: ' +(!(helperArray.indexOf(bossID) >= 0)) + ' bossID is: ' + bossID +
+               ' type for array is: ' + typeof helperArray[0] + ' type for bossID is: ' + typeof bossID);
+
 
   if (classID != 0){
     dpsScatterChart();
@@ -259,7 +261,7 @@ function caseSelection(bossID, classID) {
   //Guardian
   if(classID == 9 && !(helperArray.indexOf(bossID) >= 0)) {
     console.log('going to draw retal chart');
-    
+
     retalScatterChart();
     return;
   }
