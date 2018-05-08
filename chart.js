@@ -263,6 +263,7 @@ function caseSelection(bossID, classID) {
 
   //Scourge
   else if(classID == 7 && !(helperArray.indexOf(bossID) >= 0)) {
+    console.log
     scourgeScatterChart();
     return;
   }
@@ -338,7 +339,7 @@ function scourgeScatterChart(){
   scourgeWrapper = new google.visualization.ChartWrapper({
     'chartType': 'ScatterChart',
     'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
-    'query': 'SELECT B, C WHERE D = "No", C WHERE D = "Yes, to boss", C WHERE D ="Yes, from boss"',
+    'query': 'SELECT B,  C WHERE D CONTAINS "Yes, to boss", C WHERE D CONTAINS "Yes, from boss"', //SELECT B, C WHERE D = "Yes, to boss" || D = "Yes, from boss"
     'containerId': 'scourge',
     'options': {title: 'Epi Bouncing',
                 series: {
