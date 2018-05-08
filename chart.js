@@ -248,6 +248,7 @@ function caseSelection(bossID, classID) {
     drawScatterRetalVisualization();
     return 'SELECT D, B OFFSET 0';
   }
+  //regular behavior
   else if(!(classID in [0,7,9,10]) && !(bossID in [2,3,12])) {
     return 'SELECT B, C';
   }
@@ -291,7 +292,8 @@ function drawScatterRetalVisualization() {
                 hAxis: {title:'LI',
                         format: 'short',
                         minValue: 0}}
-    });
+  });
+  console.log('drawing retal chart');
   retalWrapper.draw();
 }
 
