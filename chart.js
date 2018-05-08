@@ -359,7 +359,9 @@ function scourgeScatterChart(){
   });
 
   scourgeWrapper.setQuery('SELECT B, C WHERE D CONTAINS "Yes"');
-  var data1 = scourgeWrapper.getDataTable();
+  var data1 = scourgeWrapper.getView().toDataTable();
+  console.log(scourgeWrapper.getView().toDataTable());
+  console.log('data1 AFTER ASSIGN: ' + data1);
   scourgeWrapper.setQuery('SELECT B, C WHERE D CONTAINS "from"');
   var data2 = scourgeWrapper.getDataTable();
   scourgeWrapper.setQuery('SELECT B, C WHERE D CONTAINS "No"');
