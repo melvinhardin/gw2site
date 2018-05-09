@@ -226,8 +226,8 @@ var retalWrapper = null;
 var scourgeWrapper = null;
 
 // Load the Visualization API and the corechart package.
-google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.load('current', { 'packages': ['table'] });
+google.charts.load('current', {'packages': ['corechart']});
+google.charts.load('current', {'packages': ['table']});
 
 // clear old charts
 function clearChart(){
@@ -248,7 +248,7 @@ function caseSelection(bossID, classID) {
   bossID = parseInt(bossID);
   classID = parseInt(classID);
   var queryString = 'SELECT B, C OFFSET 0';
-  var helperArray = [2,3,12];
+  var helperArray = [2, 3, 12];
   drawTableVisualization();
 
   if (classID != 0){
