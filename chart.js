@@ -225,6 +225,10 @@ var scatterWrapper = null;
 var retalWrapper = null;
 var scourgeWrapper = null;
 
+//for queries
+var dataTableArray = [null, null, null];
+var dataArray = [null, null, null];
+
 // Load the Visualization API and the corechart package.
 google.charts.load('current', {'packages': ['corechart']});
 google.charts.load('current', {'packages': ['table']});
@@ -239,6 +243,9 @@ function clearChart(){
   }
   while (retal.firstChild) {
     retal.removeChild(retal.firstChild);
+  }
+  while (scourge.firstChild) {
+    scourge.removeChild(scourge.firstChild);
   }
 }
 
@@ -343,12 +350,20 @@ function scourgeScatterChart(){
     'containerId': 'scourge',
     'options': {title: 'Epi Bouncing',
                 series: {
-                  0: {targetAxisIndex: 0},
-                  1: {targetAxisIndex: 1},
-                  2: {targetAxisIndex: 2},
+                  0: {targetAxisIndex: 0,
+                      labelInLegend: 'Epi to Boss',
+                      pointSize: 5},
+                  1: {targetAxisIndex: 0,
+                      labelInLegend: 'Epi from Boss',
+                      pointSize: 5},
+                  2: {targetAxisIndex: 0,
+                      labelInLegend: 'No Epi',
+                      pointSize: 5},
                 },
-                vAxes: {
-                  0: {title: 'DPS'}
+                vAxis: {
+                  title: 'DPS',
+                  format: 'short',
+                  minValue: 0
                 },
                 hAxis: {
                   title: 'LI',
@@ -358,36 +373,27 @@ function scourgeScatterChart(){
                }
   });
 
-  scourgeWrapper.setQuery('SELECT B, C WHERE D CONTAINS "Yes"');
-  var data1 = scourgeWrapper.getView().toDataTable();
-  console.log(scourgeWrapper.getView().toDataTable());
-  console.log('data1 AFTER ASSIGN: ' + data1);
-  scourgeWrapper.setQuery('SELECT B, C WHERE D CONTAINS "from"');
-  var data2 = scourgeWrapper.getDataTable();
-  scourgeWrapper.setQuery('SELECT B, C WHERE D CONTAINS "No"');
-  var data3 = scourgeWrapper.getDataTable();
+  var data1 = dataArray[0];
+  var data2 = dataArray[1];
+  var data3 = dataArray[2];
   var joinData = null;
-  console.log('data1: ' + data1 + ' data2: ' + data2 + ' data3: ' + data3);
-  if(data1 == null && data2 != null) {
-    joinData = data2;
-  }
-  else if(data2 == null && data1 != null) {
-    joinData = data1;
-  }
-  else if(data1 == null && data2 == null) {
-    joinData = data3;
-  }
-  else {
-    joinData = google.visualization.data.join(data1, data2, 'full', [[0,0]], [0], [0]);
-  }
 
-  if(data3 != null){
-    joinData = google.visualization.data.join(joinData, data3, 'full', [[0,0]], [0], [0]);
-  }
+  // send queries for different epi bouncing dps
+  var query = new google.visualization.Query(sheetLink + GID + '&headers=1&tq=' + 'SELECT B, C WHERE D CONTAINS "to"');
+  query.send(handleQueryResponseDt1);
+
+  query = new google.visualization.Query(sheetLink + GID + '&headers=1&tq=' + 'SELECT B, C WHERE D CONTAINS "from"');
+  query.send(handleQueryResponseDt2);
+
+  query = new google.visualization.Query(sheetLink + GID + '&headers=1&tq=' + 'SELECT B, C WHERE D CONTAINS "No"');
+  query.send(handleQueryResponseDt3);
+
+  joinData = google.visualization.data.join(data1, data2, 'full', [[0,0]], [1], [1]);
+
+  joinData = google.visualization.data.join(joinData, data3, 'full', [[0,0]], [1,2], [1]);
 
   scourgeWrapper.setDataTable(joinData);
 
-  console.log('drawing scourge');
   scourgeWrapper.draw();
 }
 
@@ -409,6 +415,18 @@ function drawStackedBarVisualization() {
     google.visualization.errors.removeAll(document.getElementById(stackedBarWrapper.getContainerId()));
   });
   stackedBarWrapper.draw();
+}
+
+function handleQueryResponseDt1(response){
+  dataArray[0] = response.getDataTable();
+}
+
+function handleQueryResponseDt2(response){
+  dataArray[1] = response.getDataTable();
+}
+
+function handleQueryResponseDt3(response){
+  dataArray[2] = response.getDataTable();
 }
 
 window.onload = function() {
