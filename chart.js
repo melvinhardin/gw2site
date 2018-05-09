@@ -224,6 +224,8 @@ var tableWrapper = null;
 var scatterWrapper = null;
 var retalWrapper = null;
 var scourgeWrapper = null;
+var sabWrapper = null;
+var slothWrapper = null;
 
 //for queries
 var dataTableArray = [null, null, null];
@@ -247,6 +249,9 @@ function clearChart(){
   while (scourge.firstChild) {
     scourge.removeChild(scourge.firstChild);
   }
+  while (bossMech.firstChild) {
+    bossMech.removeChild(bossMech.firstChild);
+  }
 }
 
 //Case to get each table
@@ -256,22 +261,33 @@ function caseSelection(bossID, classID) {
   classID = parseInt(classID);
   var queryString = 'SELECT B, C OFFSET 0';
   var helperArray = [2, 3, 12];
+  var sabArray = [0, 2, 3, 4, 7, 8, 9, 10];
   drawTableVisualization();
 
   if (classID != 0){
     dpsScatterChart();
   }
-
   //Guardian
   if(classID == 9) {
     retalScatterChart();
     return;
   }
-
   //Scourge
   else if(classID == 7 && !(helperArray.indexOf(bossID) >= 0)) {
     console.log
     scourgeScatterChart();
+    return;
+  }
+
+  // Sabetha
+  if(bossID == 2 && (sabArray.indexOf(classID) == -1)){
+    sabScatterChart();
+    return;
+  }
+
+  // Slothasor
+  else if(bossID == 3 && (sabArray.indexOf(classID) == -1)){
+    slothScatterChart();
     return;
   }
 
@@ -395,6 +411,96 @@ function scourgeScatterChart(){
   scourgeWrapper.setDataTable(joinData);
 
   scourgeWrapper.draw();
+}
+
+//Sabetha plot
+function sabScatterChart(){
+  sabWrapper = new google.visualization.ChartWrapper({
+    'chartType': 'ScatterChart',
+    'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
+    'containerId': 'bossMech',
+    'options': {title: 'Cannon DPS',
+                series: {
+                  0: {targetAxisIndex: 0,
+                      labelInLegend: 'No Cannons',
+                      pointSize: 5},
+                  1: {targetAxisIndex: 0,
+                      labelInLegend: 'Cannons',
+                      pointSize: 5},
+                },
+                vAxis: {
+                  title: 'DPS',
+                  format: 'short',
+                  minValue: 0
+                },
+                hAxis: {
+                  title: 'LI',
+                  format: 'short',
+                  minValue: 0
+                }
+               }
+  });
+
+  var data1 = dataArray[0];
+  var data2 = dataArray[1];
+
+  // send queries for different epi bouncing dps
+  var query = new google.visualization.Query(sheetLink + GID + '&headers=1&tq=' + 'SELECT B, C WHERE D CONTAINS "No"');
+  query.send(handleQueryResponseDt1);
+
+  query = new google.visualization.Query(sheetLink + GID + '&headers=1&tq=' + 'SELECT B, C WHERE D CONTAINS "-"');
+  query.send(handleQueryResponseDt2);
+
+  joinData = google.visualization.data.join(data1, data2, 'full', [[0,0]], [1], [1]);
+
+  sabWrapper.setDataTable(joinData);
+
+  sabWrapper.draw();
+}
+
+//Slot plot
+function slothScatterChart(){
+  sloWrapper = new google.visualization.ChartWrapper({
+    'chartType': 'ScatterChart',
+    'dataSourceUrl': sheetLink + GID + '&headers=1&tq=',
+    'containerId': 'bossMech',
+    'options': {title: 'Shroom DPS',
+                series: {
+                  0: {targetAxisIndex: 0,
+                      labelInLegend: 'No Shroom',
+                      pointSize: 5},
+                  1: {targetAxisIndex: 0,
+                      labelInLegend: 'Shroom',
+                      pointSize: 5},
+                },
+                vAxis: {
+                  title: 'DPS',
+                  format: 'short',
+                  minValue: 0
+                },
+                hAxis: {
+                  title: 'LI',
+                  format: 'short',
+                  minValue: 0
+                }
+               }
+  });
+
+  var data1 = dataArray[0];
+  var data2 = dataArray[1];
+
+  // send queries for different epi bouncing dps
+  var query = new google.visualization.Query(sheetLink + GID + '&headers=1&tq=' + 'SELECT B, C WHERE D CONTAINS "0"');
+  query.send(handleQueryResponseDt1);
+
+  query = new google.visualization.Query(sheetLink + GID + '&headers=1&tq=' + 'SELECT B, C WHERE D !CONTAINS "0"');
+  query.send(handleQueryResponseDt2);
+
+  joinData = google.visualization.data.join(data1, data2, 'full', [[0,0]], [1], [1]);
+
+  slothWrapper.setDataTable(joinData);
+
+  slothWrapper.draw();
 }
 
 function drawCandleVisualization() {

@@ -14,10 +14,10 @@
 
 DPS:
  Case guardian: {Time, LI, DPS, Retal}                          class 9      Scatter \o/
- Case Scourge:  {DPS, Epi bounce, out/in bounce}                class 7      Scatter 
+ Case Scourge:  {DPS, Epi bounce, out/in bounce}                class 7      Scatter \o/
 
 Bosses:
- Case Sloth {DPS, Shroom}                                       boss 3       Scatter
+ Case Sloth {DPS, Shroom}                                       boss 3       Scatter 
  Case Sab   {DPS, Canon}                                        boss 2       Scatter
  Case Dhuum {DPS, Green}                                        boss 12      Scatter
 
